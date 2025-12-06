@@ -1,7 +1,8 @@
 import { Package } from "lucide-react";
+import { Links } from "../Elements/Link";
 
 function GuestLayout(props) {
-  const { title, children } = props;
+  const { title, children, view } = props;
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -16,17 +17,40 @@ function GuestLayout(props) {
           </div>
           {children}
           <div className="text-center mt-6">
-            <p className="text-sm text-gray-800">
-              Belum punya akun?{" "}
-              <a href="#" className="text-sm text-blue-600 hover:underline hover:text-blue-700">
-                Daftar
-              </a>
-            </p>
+            <Navigasi contenType={view}></Navigasi>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+const Navigasi = (props) => {
+  const { contenType } = props;
+
+  if (contenType === "login") {
+    return (
+      <>
+        <p className="text-sm text-gray-800">
+          Belum punya akun?{" "}
+          <Links to={"/register"} classname="text-sm text-blue-600 hover:underline hover:text-blue-700">
+            Daftar
+          </Links>
+        </p>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <p className="text-sm text-gray-800">
+          Sudah memiliki punya akun?{" "}
+          <Links to={"/"} classname="text-sm text-blue-600 hover:underline hover:text-blue-700">
+            Login
+          </Links>
+        </p>
+      </>
+    );
+  }
+};
 
 export default GuestLayout;

@@ -7,7 +7,7 @@ import GuestLayout from "../components/Layouts/GuestLayout";
 
 function AuthForm() {
   return (
-    <GuestLayout title="Selamat Datang">
+    <GuestLayout title="Selamat Datang" view="login">
       <form action="#" autoComplete="off" method="post" className="space-y-4">
         <TextInput type="email" title="Email" nama="email" icon={Mail} placeholder="example@gmail.com"></TextInput>
         <TextInput type="password" title="Password" nama="password" icon={Lock} placeholder="Masukan Password"></TextInput>

@@ -5,7 +5,7 @@ import GuestLayout from "../components/Layouts/GuestLayout";
 
 function RegisterForm() {
   return (
-    <GuestLayout title="Mendaftar Akun">
+    <GuestLayout title="Mendaftar Akun" view="register">
       <form action="#" method="post" autoComplete="off" className="space-y-4">
         <TextInput type="text" nama="nama" title="Nama Lengkap" icon={User} placeholder="Masukan Nama Anda"></TextInput>
         <TextInput type="email" title="Email" nama="email" icon={Mail} placeholder="example@gmail.com"></TextInput>

@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 
 export const Links = (props) => {
-  const { to, children } = props;
+  const { to, children, classname } = props;
   return (
     <>
-      <Link to={to}>{children}</Link>
+      <Link to={to} className={classname}>
+        {children}
+      </Link>
     </>
   );
 };
