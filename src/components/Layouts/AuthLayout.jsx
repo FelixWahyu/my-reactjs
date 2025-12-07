@@ -17,7 +17,7 @@ export default function AuthLayout(props) {
               </div>
               <span className="text-lg font-semibold text-gray-100">Admin Panel</span>
             </div>
-            <button className="lg:hidden cursor-pointer text-gray-800 hover:text-blue-500">
+            <button onClick={() => setSidebarOpen(false)} className="lg:hidden cursor-pointer text-gray-100 hover:text-blue-500">
               <X className="w-5 h-5"></X>
             </button>
           </div>
@@ -28,7 +28,7 @@ export default function AuthLayout(props) {
       <div className="lg:pl-64">
         <header className="sticky top-0 z-30 h-16 backdrop-blur-sm border-b border-gray-400 shadow-sm">
           <div className="flex items-center justify-between h-full px-6">
-            <button className="lg:hidden cursor-pointer rounded-lg p-2 hover:bg-gray-100">
+            <button onClick={() => setSidebarOpen(true)} className="lg:hidden cursor-pointer rounded-lg p-2 hover:bg-gray-100">
               <Menu className="w-5 h-5 "></Menu>
             </button>
           </div>
