@@ -1,13 +1,22 @@
-import { Package, X, Menu } from "lucide-react";
+import { Package, X, Menu, LogOut } from "lucide-react";
 import { Navigation } from "../Fragments/Navbar/NavLink";
 import { useState } from "react";
+import UserData from "../../data/DataUsers";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthLayout(props) {
   const { children } = props;
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    confirm("Apakah yakin ingin keluar?");
+    navigate("/");
+  };
 
   return (
     <div className="min-h-screen">
+      {sidebarOpen && <div className="fixed inset-0 z-40 bg-gray-800/70 backdrop-blur-md lg:hidden" onClick={() => setSidebarOpen(false)}></div>}
       <aside className={"fixed h-full top-0 left-0 w-64 z-50 bg-gray-800 border-x border-gray-400 transform transition-transform duration-300 lg:translate-x-0 " + (sidebarOpen ? "translate-x-0" : "-translate-x-full")}>
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between h-16 px-6 border-b border-gray-600">
@@ -21,8 +30,24 @@ export default function AuthLayout(props) {
               <X className="w-5 h-5"></X>
             </button>
           </div>
-
           <Navigation></Navigation>
+          <div className="p-4 border-t border-gray-600">
+            <div className="flex flex-col items-center">
+              <div className="flex items-center gap-3 px-2 py-1 mb-3">
+                <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center">
+                  <span className="text-white font-semibold text-md">{UserData[0]?.name?.charAt(0).toUpperCase()}</span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium truncate text-gray-100">{UserData[0].email}</p>
+                  <p className="text-xs text-gray-100/60">{UserData[0].name}</p>
+                </div>
+              </div>
+              <button type="submit" onClick={handleLogout} className="flex text-gray-100 w-full justify-center items-center cursor-pointer rounded-lg px-4 py-2 hover:bg-red-500">
+                <LogOut className="w-4 h-4 mr-2" />
+                Log Out
+              </button>
+            </div>
+          </div>
         </div>
       </aside>
       <div className="lg:pl-64">
