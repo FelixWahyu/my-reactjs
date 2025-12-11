@@ -10,8 +10,10 @@ export default function AuthLayout(props) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    confirm("Apakah yakin ingin keluar?");
-    navigate("/");
+    const alertLogout = confirm("Apakah yakin ingin keluar?");
+    if (alertLogout) {
+      navigate("/");
+    }
   };
 
   return (

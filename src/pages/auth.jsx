@@ -1,5 +1,7 @@
 // import { FormAuth } from "../components/Fragments/Form/FormAuth";
 import { Button } from "../components/Elements/Button";
+import { Label } from "../components/Elements/Label";
+import { Links } from "../components/Elements/Link";
 import { TextInput } from "../components/Fragments/TextInput/TextInput";
 import { User, Lock, Mail, Loader2 } from "lucide-react";
 import GuestLayout from "../components/Layouts/GuestLayout";
@@ -12,19 +14,31 @@ function AuthForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const validateLogin = (email, password) => {
+    if (!email || !password) {
+      return "EMPTY";
+    }
+
+    const user = UserData.find((user) => user.email === email && user.password === password);
+
+    return user ? "OK" : "INVALID";
+  };
+
   const handleToSubmit = (e) => {
     e.preventDefault();
 
-    if (email === UserData[0].email && password === UserData[0].password) {
-      alert("Anda berhasil login");
-      navigate("/dashboard");
-    } else if (email === "" && password === "") {
+    const statusLogin = validateLogin(email, password);
+
+    if (statusLogin === "EMPTY") {
       alert("Silahkan masukan data diri Anda!");
-      navigate("/");
-    } else {
+      return;
+    } else if (statusLogin === "INVALID") {
       alert("Email atau password yang Anda masukan salah!");
-      navigate("/");
+      return;
     }
+
+    alert("Anda berhasil login");
+    navigate("/dashboard");
 
     setEmail("");
     setPassword("");
@@ -35,6 +49,15 @@ function AuthForm() {
       <form onSubmit={handleToSubmit} autoComplete="off" method="post" className="space-y-4">
         <TextInput type="email" title="Email" nama="email" icon={Mail} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@gmail.com"></TextInput>
         <TextInput type="password" title="Password" nama="password" icon={Lock} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Masukan Password"></TextInput>
+        <div className="flex justify-between items-center">
+          <div className="flex gap-2">
+            <input type="checkbox" name="remember" id="remember" />
+            <Label htmlfor="remember">Remember me</Label>
+          </div>
+          <Links to={"/register"} classname="text-sm underline text-blue-500 hover:text-blue-600">
+            Forgot Password
+          </Links>
+        </div>
         <div className="mt-6">
           <Button type="submit">Masuk</Button>
         </div>
