@@ -5,16 +5,20 @@ import Dashboard from "../pages/dashboard";
 import UsersContent from "../pages/users";
 import CategoryContent from "../pages/category";
 import ProductContent from "../pages/product";
+import OrdersPage from "../pages/orders";
 
 export const AppRouter = () => {
   return (
-    <Routes>
-      <Route path="/" element={<AuthForm></AuthForm>}></Route>
-      <Route path="/register" element={<RegisterForm></RegisterForm>}></Route>
-      <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
-      <Route path="/user" element={<UsersContent></UsersContent>}></Route>
-      <Route path="/category" element={<CategoryContent></CategoryContent>}></Route>
-      <Route path="/product" element={<ProductContent></ProductContent>}></Route>
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" element={<AuthForm></AuthForm>}></Route>
+        <Route path="/register" element={<RegisterForm></RegisterForm>}></Route>
+        <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
+        <Route path="/user" element={<UsersContent></UsersContent>}></Route>
+        <Route path="/category" element={<CategoryContent></CategoryContent>}></Route>
+        <Route path="/product" element={<ProductContent></ProductContent>}></Route>
+        <Route path="/orders" element={<OrdersPage></OrdersPage>}></Route>
+      </Routes>
+    </>
   );
 };

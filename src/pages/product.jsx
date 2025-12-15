@@ -20,7 +20,7 @@ export default function ProductContent() {
             <tbody>
               {Produks?.length > 0 ? (
                 Produks.map((product, index) => (
-                  <tr key={product.id} className="odd:bg-white even:bg-gray-50 hover:bg-gray-100 transition">
+                  <tr key={product.id} className="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition">
                     <td className="px-4 py-2 text-center">{index + 1}</td>
                     <td className="px-4 py-2">{product.product_name}</td>
                     <td className="px-4 py-2">{product.category}</td>
