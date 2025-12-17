@@ -26,11 +26,15 @@ export default function OrdersPage() {
                 <p className="text-sm">Rp {item.price.toLocaleString("id-ID")}</p>
               </div>
               <div className="flex gap-2 items-center justify-center">
-                <button onClick={() => handleTambah(item.id)} className="bg-gray-100 flex items-center justify-center w-6 h-6 rounded-md shadow-sm cursor-pointer font-medium text-sm hover:bg-gray-200">
+                <button onClick={() => handleTambah(item.id)} className="bg-gray-100 flex items-center justify-center w-6 h-6 rounded-md shadow-sm cursor-pointer font-medium text-sm border border-gray-300 hover:bg-gray-200">
                   +
                 </button>
                 <span className="w-6 text-center text-sm tabular-nums">{item.qty}</span>
-                <button onClick={() => handleKurangi(item.id)} className="bg-gray-100 w-6 h-6 flex items-center justify-center rounded-md shadow-sm cursor-pointer font-medium text-sm hover:bg-gray-200">
+                <button
+                  onClick={() => handleKurangi(item.id)}
+                  disabled={item.qty === 0}
+                  className="bg-gray-100 w-6 h-6 flex items-center justify-center rounded-md shadow-sm cursor-pointer font-medium text-sm border border-gray-300 hover:bg-gray-200 disabled:opacity-50"
+                >
                   -
                 </button>
               </div>

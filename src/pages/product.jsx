@@ -1,11 +1,26 @@
+import { useState } from "react";
 import AuthLayout from "../components/Layouts/AuthLayout";
 import Produks from "../data/DataProduk";
 
 export default function ProductContent() {
+  const [search, setSearch] = useState("");
+
+  const filterProduk = Produks.filter((produk) => produk.product_name.toLowerCase().includes(search.toLowerCase()) || produk.category.toLowerCase().includes(search.toLowerCase()));
+
   return (
     <AuthLayout>
       <div className="max-w-4xl mx-auto p-4">
         <h2 className="text-3xl text-gray-800 font-semibold mb-6">Produk List</h2>
+        <div className="mb-4 max-w-md">
+          <input
+            type="text"
+            name="search"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search here..."
+            className="px-3 py-2 w-full bg-gray-100 border border-gray-300 shadow-sm rounded-lg outline-none focus:ring-1 focus:border-blue-600 focus:ring-blue-500 transition-all"
+          />
+        </div>
         <div className="overflow-x-auto shadow-md rounded-lg">
           <table className="border border-gray-300 border-collapse w-full">
             <thead className="bg-gray-800">
@@ -18,8 +33,8 @@ export default function ProductContent() {
               </tr>
             </thead>
             <tbody>
-              {Produks?.length > 0 ? (
-                Produks.map((product, index) => (
+              {filterProduk?.length > 0 ? (
+                filterProduk.map((product, index) => (
                   <tr key={product.id} className="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition">
                     <td className="px-4 py-2 text-center">{index + 1}</td>
                     <td className="px-4 py-2">{product.product_name}</td>
