@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import AuthLayout from "../components/Layouts/AuthLayout";
-import Produks from "../data/DataProduk";
 import { getProduk } from "../api/ProdukApi";
 
 export default function ProductContent() {
   const [search, setSearch] = useState("");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 5;
 
   useEffect(() => {
     getProduk()
@@ -14,7 +16,18 @@ export default function ProductContent() {
       .finally(() => setLoading(false));
   }, []);
 
-  // const filterProduk = Produks.filter((produk) => produk.product_name.toLowerCase().includes(search.toLowerCase()) || produk.category.toLowerCase().includes(search.toLowerCase()));
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [search]);
+
+  const filteredProduct = products.filter((produk) => produk.title.toLowerCase().includes(search.toLowerCase()) || produk.category.toLowerCase().includes(search.toLowerCase()));
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  const currentProducts = filteredProduct.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPage = Math.ceil(filteredProduct.length / itemsPerPage);
 
   return (
     <AuthLayout>
@@ -38,48 +51,50 @@ export default function ProductContent() {
                 <th className="text-white px-4 py-2 text-left font-semibold">Nama Produk</th>
                 <th className="text-white px-4 py-2 text-left font-semibold">Kategori</th>
                 <th className="text-white px-4 py-2 text-left font-semibold">Harga</th>
-                <th className="text-white px-4 py-2 text-center font-semibold">Kuantitas</th>
+                <th className="text-white px-4 py-2 text-center font-semibold">Gambar</th>
               </tr>
             </thead>
             <tbody>
-              {/* {filterProduk?.length > 0 ? (
-                filterProduk.map((product, index) => (
-                  <tr key={product.id} className="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition">
-                    <td className="px-4 py-2 text-center">{index + 1}</td>
-                    <td className="px-4 py-2">{product.product_name}</td>
-                    <td className="px-4 py-2">{product.category}</td>
-                    <td className="px-4 py-2">Rp {product.price.toLocaleString("id-ID")}</td>
-                    <td className="px-4 py-2 text-center">{product.qty}</td>
-                  </tr>
-                ))
-              ) : (
-                <tr>
-                  <td colSpan={5} className="py-4 text-center bg-red-50 text-red-500">
-                    Data Produk belum tersedia.
-                  </td>
-                </tr>
-              )} */}
               {loading ? (
                 <tr>
                   <td colSpan={5} className="py-4 text-center">
                     Loading...
                   </td>
                 </tr>
-              ) : (
-                products.map((item, index) => (
+              ) : currentProducts.length > 0 ? (
+                currentProducts.map((item, index) => (
                   <tr key={item.id} className="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition">
-                    <td className="px-4 py-2 text-center">{index + 1}</td>
+                    <td className="px-4 py-2 text-center">{indexOfFirstItem + index + 1}</td>
                     <td className="px-4 py-2">{item.title}</td>
                     <td className="px-4 py-2">{item.category}</td>
-                    <td className="px-4 py-2">$ {item.price}</td>
+                    <td className="px-4 py-2">${item.price.toFixed(2)}</td>
                     <td className="px-4 py-2 text-center">
                       <img src={item.image} alt={item.title} className="w-10 h-10 object-cover" />
                     </td>
                   </tr>
                 ))
+              ) : (
+                <tr>
+                  <td colSpan={5} className="text-center text-red-500 bg-red-50 py-4">
+                    Data produk tidak ditemukan.
+                  </td>
+                </tr>
               )}
             </tbody>
           </table>
+        </div>
+        <div className="flex justify-end gap-1 mt-6">
+          <button onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))} disabled={currentPage === 1} className="px-3 py-1 border border-gray-400 rounded-md cursor-pointer">
+            Prev
+          </button>
+          {[...Array(totalPage)].map((_, i) => (
+            <button key={i} onClick={() => setCurrentPage(i + 1)} className={`px-3 py-1 border border-gray-400 rounded-md cursor-pointer ${currentPage === i + 1 ? "bg-blue-600 text-white" : ""}`}>
+              {i + 1}
+            </button>
+          ))}
+          <button onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPage))} disabled={currentPage === totalPage} className="px-3 py-1 border border-gray-400 rounded-md cursor-pointer">
+            Next
+          </button>
         </div>
       </div>
     </AuthLayout>
