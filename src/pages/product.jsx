@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import AuthLayout from "../components/Layouts/AuthLayout";
 import { getProduk } from "../api/ProdukApi";
+import { Links } from "../components/Elements/Link";
 
 export default function ProductContent() {
   const [search, setSearch] = useState("");
@@ -52,6 +53,7 @@ export default function ProductContent() {
                 <th className="text-white px-4 py-2 text-left font-semibold">Kategori</th>
                 <th className="text-white px-4 py-2 text-left font-semibold">Harga</th>
                 <th className="text-white px-4 py-2 text-center font-semibold">Gambar</th>
+                <th className="text-white px-4 py-2 text-center font-semibold">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -69,7 +71,12 @@ export default function ProductContent() {
                     <td className="px-4 py-2">{item.category}</td>
                     <td className="px-4 py-2">${item.price.toFixed(2)}</td>
                     <td className="px-4 py-2 text-center">
-                      <img src={item.image} alt={item.title} className="w-10 h-10 object-cover" />
+                      <img src={item.image} alt={item.title} className="w-16 h-16 object-cover" />
+                    </td>
+                    <td className="px-4 py-2">
+                      <Links to={`/product/${item.id}`} classname="bg-blue-500 text-white font-semibold px-2 py-0.5 rounded-lg hover:bg-blue-600">
+                        Details
+                      </Links>
                     </td>
                   </tr>
                 ))
