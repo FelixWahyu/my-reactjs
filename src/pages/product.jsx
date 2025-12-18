@@ -1,15 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AuthLayout from "../components/Layouts/AuthLayout";
 import Produks from "../data/DataProduk";
+import { getProduk } from "../api/ProdukApi";
 
 export default function ProductContent() {
   const [search, setSearch] = useState("");
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const filterProduk = Produks.filter((produk) => produk.product_name.toLowerCase().includes(search.toLowerCase()) || produk.category.toLowerCase().includes(search.toLowerCase()));
+  useEffect(() => {
+    getProduk()
+      .then((res) => setProducts(res.data))
+      .finally(() => setLoading(false));
+  }, []);
+
+  // const filterProduk = Produks.filter((produk) => produk.product_name.toLowerCase().includes(search.toLowerCase()) || produk.category.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <AuthLayout>
-      <div className="max-w-4xl mx-auto p-4">
+      <div className="p-4">
         <h2 className="text-3xl text-gray-800 font-semibold mb-6">Produk List</h2>
         <div className="mb-4 max-w-md">
           <input
@@ -33,7 +42,7 @@ export default function ProductContent() {
               </tr>
             </thead>
             <tbody>
-              {filterProduk?.length > 0 ? (
+              {/* {filterProduk?.length > 0 ? (
                 filterProduk.map((product, index) => (
                   <tr key={product.id} className="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition">
                     <td className="px-4 py-2 text-center">{index + 1}</td>
@@ -49,6 +58,25 @@ export default function ProductContent() {
                     Data Produk belum tersedia.
                   </td>
                 </tr>
+              )} */}
+              {loading ? (
+                <tr>
+                  <td colSpan={5} className="py-4 text-center">
+                    Loading...
+                  </td>
+                </tr>
+              ) : (
+                products.map((item, index) => (
+                  <tr key={item.id} className="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition">
+                    <td className="px-4 py-2 text-center">{index + 1}</td>
+                    <td className="px-4 py-2">{item.title}</td>
+                    <td className="px-4 py-2">{item.category}</td>
+                    <td className="px-4 py-2">$ {item.price}</td>
+                    <td className="px-4 py-2 text-center">
+                      <img src={item.image} alt={item.title} className="w-10 h-10 object-cover" />
+                    </td>
+                  </tr>
+                ))
               )}
             </tbody>
           </table>

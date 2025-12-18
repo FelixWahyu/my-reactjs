@@ -5,7 +5,7 @@ function GuestLayout(props) {
   const { title, children, view } = props;
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url('/images/bg-image.png')" }}>
+    <div className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat relative" style={{ backgroundImage: "url('/images/bg-image.png')" }}>
       <div className="bg-black/50 absolute inset-0"></div>
       <div className="relative z-10 px-6 py-12 flex items-center justify-center w-full">
         <div className="max-w-md w-full p-6 border bg-white/70 backdrop-blur-sm border-gray-300 shadow-md rounded-lg hover:shadow-[0_0_20px_rgba(59,130,246,0.8)]">
