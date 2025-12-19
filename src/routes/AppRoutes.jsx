@@ -7,6 +7,8 @@ import CategoryContent from "../pages/category";
 import ProductContent from "../pages/product";
 import OrdersPage from "../pages/orders";
 import DetailProduct from "../pages/detailProduct";
+import CounterPage from "../pages/counter";
+import TodoPage from "../pages/todoPage";
 
 export const AppRouter = () => {
   return (
@@ -20,6 +22,8 @@ export const AppRouter = () => {
         <Route path="/product" element={<ProductContent></ProductContent>}></Route>
         <Route path="/product/:id" element={<DetailProduct></DetailProduct>}></Route>
         <Route path="/orders" element={<OrdersPage></OrdersPage>}></Route>
+        <Route path="/counter" element={<CounterPage></CounterPage>}></Route>
+        <Route path="/todo-list" element={<TodoPage></TodoPage>}></Route>
       </Routes>
     </>
   );

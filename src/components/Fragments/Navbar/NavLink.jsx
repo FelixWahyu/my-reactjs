@@ -1,5 +1,5 @@
 import { Links } from "../../Elements/Link";
-import { Users, LayoutDashboard, FolderOpen, Package, X, ShoppingCart } from "lucide-react";
+import { Users, LayoutDashboard, FolderOpen, Package, X, ShoppingCart, File, Folder } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const menuLink = [
@@ -8,6 +8,8 @@ const menuLink = [
   { path: "/category", icon: FolderOpen, label: "Category" },
   { path: "/product", icon: Package, label: "Product" },
   { path: "/orders", icon: ShoppingCart, label: "Orders" },
+  { path: "/counter", icon: File, label: "Counter" },
+  { path: "/todo-list", icon: Folder, label: "Todo List" },
 ];
 
 export const Navigation = () => {
