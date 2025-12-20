@@ -2,7 +2,7 @@ import AuthLayout from "../components/Layouts/AuthLayout";
 import UserData from "../data/DataUsers";
 import UserCard from "../components/Fragments/Card/UserCard";
 import { TextInput } from "../components/Fragments/TextInput/TextInput";
-import { Backpack, Mail, User } from "lucide-react";
+import { Backpack, Mail, User, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 export default function UsersContent() {
@@ -31,6 +31,10 @@ export default function UsersContent() {
     setJobUser("");
   };
 
+  const handleDeleteData = (id) => {
+    setDataUsers(dataUsers.filter((data) => data.id !== id));
+  };
+
   return (
     <AuthLayout>
       <div className="max-w-4xl mx-auto p-4 mb-6">
@@ -54,6 +58,7 @@ export default function UsersContent() {
                 <th className="px-4 py-2 text-white text-left font-semibold">Nama</th>
                 <th className="px-4 py-2 text-white text-left font-semibold">Pekerjaan</th>
                 <th className="px-4 py-2 text-white text-left font-semibold">Email</th>
+                <th className="px-4 py-2 text-white text-center font-semibold">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -64,6 +69,11 @@ export default function UsersContent() {
                     <td className="px-4 py-2">{user.name}</td>
                     <td className="px-4 py-2">{user.job}</td>
                     <td className="px-4 py-2">{user.email}</td>
+                    <td className="px-4 py-2 text-center">
+                      <button onClick={() => handleDeleteData(user.id)} className="px-2 py-1 cursor-pointer bg-red-50 text-red-500 rounded-md hover:bg-red-100 hover:text-red-600">
+                        <Trash2 className="w-5 h-5"></Trash2>
+                      </button>
+                    </td>
                   </tr>
                 ))
               ) : (
@@ -79,7 +89,7 @@ export default function UsersContent() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-center gap-4">
           {dataUsers.map((data) => (
             <div key={data.id}>
-              <UserCard name={data.name} job={data.job} email={data.email}></UserCard>
+              <UserCard name={data.name} job={data.job} email={data.email} onClick={() => handleDeleteData(data.id)}></UserCard>
             </div>
           ))}
         </div>
