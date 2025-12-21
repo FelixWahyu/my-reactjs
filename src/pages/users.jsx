@@ -10,11 +10,33 @@ export default function UsersContent() {
   const [nameUser, setNameUser] = useState("");
   const [emailUser, setEmailUser] = useState("");
   const [jobUser, setJobUser] = useState("");
+  const [errorMessage, setErrorMessage] = useState({});
 
   console.log(dataUsers);
 
   const handleSubmitForm = (event) => {
     event.preventDefault();
+
+    let Error = {};
+
+    if (!nameUser.trim()) {
+      // setErrorMessage({ name: "Silahkan isi nama lengkap anda!" });
+      Error.name = "Silahkan isi nama lengkap anda!";
+    } else if (nameUser.length < 3) {
+      // setErrorMessage({ email: "Silahkan isi email anda!" });
+      Error.name = "Nama minimal menggunakan 3 karakter";
+    }
+
+    if (!emailUser.trim()) {
+      Error.email = "Silahkan isi email anda!";
+    }
+
+    if (!jobUser.trim()) {
+      // setErrorMessage({ job: "Silahkan isi pekerjaan anda!" });
+      Error.job = "Silahkan isi pekerjaan anda!";
+    }
+
+    setErrorMessage(Error);
 
     if (!nameUser.trim() || !emailUser.trim() || !jobUser.trim()) return;
 
@@ -29,6 +51,7 @@ export default function UsersContent() {
     setNameUser("");
     setEmailUser("");
     setJobUser("");
+    setErrorMessage({});
   };
 
   const handleDeleteData = (id) => {
@@ -42,8 +65,11 @@ export default function UsersContent() {
           <h2 className="text-xl font-semibold text-gray-800 mb-6">Tambah User Baru</h2>
           <form onSubmit={handleSubmitForm} action="">
             <TextInput title="Nama Lengkap" type="text" nama="name" value={nameUser} onChange={(event) => setNameUser(event.target.value)} icon={User} placeholder="Masukan Nama Lengkap"></TextInput>
+            {errorMessage.name ? <p className="text-red-500 mb-1 text-sm">{errorMessage.name}</p> : ""}
             <TextInput title="Email" type="email" nama="email" icon={Mail} value={emailUser} onChange={(event) => setEmailUser(event.target.value)} placeholder="Masukan Alamat Email"></TextInput>
+            {errorMessage.email ? <p className="text-red-500 mb-1 text-sm">{errorMessage.email}</p> : ""}
             <TextInput title="Pekerjaan/Karir" type="job" nama="job" icon={Backpack} value={jobUser} onChange={(event) => setJobUser(event.target.value)} placeholder="Masukan Karir"></TextInput>
+            {errorMessage.job ? <p className="text-red-500 mb-1 text-sm">{errorMessage.job}</p> : ""}
             <div className="mt-4">
               <button className="px-3 py-1 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded-lg">Tambah</button>
             </div>
