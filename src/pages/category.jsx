@@ -6,14 +6,26 @@ import { File } from "lucide-react";
 export default function CategoryContent() {
   const [Category, setCategory] = useState(["Makanan"]);
   const [nameCategory, setNameCategory] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handelTambahCategory = (e) => {
     e.preventDefault();
 
-    if (!nameCategory.trim()) return;
+    let newError = "";
+
+    if (!nameCategory.trim()) {
+      newError = "Silahkan isi data kategori!";
+    } else if (nameCategory.length < 3) {
+      newError = "Nama kategori minimal 3 karakter";
+    }
+
+    setErrorMessage(newError);
+
+    if (newError) return;
 
     setCategory((prev) => [...prev, nameCategory]);
     setNameCategory("");
+    setErrorMessage("");
   };
 
   return (
@@ -22,8 +34,18 @@ export default function CategoryContent() {
         <div className="mb-8 p-6 border border-gray-300 rounded-lg shadow-md">
           <h2 className="text-3xl font-semibold text-gray-800 mb-6">Tambah Kategori</h2>
           <form onSubmit={handelTambahCategory} action="">
-            <TextInput type="text" title="Nama Kategori" nama="category" icon={File} value={nameCategory} onChange={(e) => setNameCategory(e.target.value)} placeholder="Masukan Nama"></TextInput>
-            <button type="submit" className="self-end cursor-pointer mt-6 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+            <TextInput
+              type="text"
+              title="Nama Kategori"
+              nama="category"
+              icon={File}
+              value={nameCategory}
+              onChange={(e) => setNameCategory(e.target.value)}
+              placeholder="Masukan Nama"
+              validation={errorMessage ? "border-red-600" : "border-gray-300"}
+            ></TextInput>
+            {errorMessage && <p className="text-red-500 text-sm mb-1">{errorMessage}</p>}
+            <button type="submit" className="self-end cursor-pointer mt-6 bg-gray-200 text-gray-800 px-3 py-1 rounded-md hover:bg-gray-300">
               Tambah
             </button>
           </form>
