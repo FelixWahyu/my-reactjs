@@ -20,10 +20,8 @@ export default function UsersContent() {
     let newError = {};
 
     if (!nameUser.trim()) {
-      // setErrorMessage({ name: "Silahkan isi nama lengkap anda!" });
       newError.name = "Silahkan isi nama lengkap anda!";
     } else if (nameUser.length < 3) {
-      // setErrorMessage({ email: "Silahkan isi email anda!" });
       newError.name = "Nama minimal menggunakan 3 karakter";
     }
 
@@ -32,7 +30,6 @@ export default function UsersContent() {
     }
 
     if (!jobUser.trim()) {
-      // setErrorMessage({ job: "Silahkan isi pekerjaan anda!" });
       newError.job = "Silahkan isi pekerjaan anda!";
     }
 
