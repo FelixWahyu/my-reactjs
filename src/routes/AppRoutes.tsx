@@ -1,4 +1,3 @@
-import React, { JSX } from "react";
 import { Routes, Route } from "react-router-dom";
 import AuthForm from "../pages/auth";
 import RegisterForm from "../pages/register";
@@ -11,7 +10,7 @@ import DetailProduct from "../pages/detailProduct";
 import CounterPage from "../pages/counter";
 import TodoPage from "../pages/todoPage";
 
-export default function AppRouter(): React.FC {
+export default function AppRouter() {
   return (
     <>
       <Routes>

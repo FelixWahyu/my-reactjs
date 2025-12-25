@@ -3,10 +3,10 @@ import { Button } from "../components/Elements/Button";
 import { Label } from "../components/Elements/Label";
 import { Links } from "../components/Elements/Link";
 import { TextInput } from "../components/Fragments/TextInput/TextInput";
-import { User, Lock, Mail, Loader2 } from "lucide-react";
+import { Lock, Mail } from "lucide-react";
 import GuestLayout from "../components/Layouts/GuestLayout";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import UserData from "../data/DataUsers";
 
 function AuthForm() {
@@ -24,7 +24,7 @@ function AuthForm() {
     return user ? "OK" : "INVALID";
   };
 
-  const handleToSubmit = (e) => {
+  const handleToSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const statusLogin = validateLogin(email, password);

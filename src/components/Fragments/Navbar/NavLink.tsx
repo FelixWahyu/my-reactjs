@@ -1,5 +1,5 @@
 import { Links } from "../../Elements/Link";
-import { Users, LayoutDashboard, FolderOpen, Package, X, ShoppingCart, File, Folder } from "lucide-react";
+import { Users, LayoutDashboard, FolderOpen, Package, ShoppingCart, File, Folder } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const menuLink = [

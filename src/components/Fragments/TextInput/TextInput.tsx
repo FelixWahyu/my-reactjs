@@ -1,8 +1,21 @@
+import type { LucideIcon } from "lucide-react";
 import { Input } from "../../Elements/Input";
 import { Label } from "../../Elements/Label";
+import type { ChangeEvent } from "react";
 
-export const TextInput = (props) => {
-  const { nama, type, title, icon: Icon, placeholder, value, onChange, validation } = props;
+type TextInputProps = {
+  nama: string;
+  type: string;
+  title: string;
+  icon?: LucideIcon;
+  placeholder?: string;
+  value: string | number;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  validation?: string;
+};
+
+export const TextInput = (props: TextInputProps) => {
+  const { nama, type, title, icon: Icon, placeholder, value, onChange, validation = "" } = props;
 
   return (
     <>

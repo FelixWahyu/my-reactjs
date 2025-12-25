@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import AuthLayout from "../components/Layouts/AuthLayout";
 import { TextInput } from "../components/Fragments/TextInput/TextInput";
 import { File } from "lucide-react";
@@ -8,8 +8,8 @@ export default function CategoryContent() {
   const [nameCategory, setNameCategory] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handelTambahCategory = (e) => {
-    e.preventDefault();
+  const handelTambahCategory = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
     let newError = "";
 
@@ -40,7 +40,7 @@ export default function CategoryContent() {
               nama="category"
               icon={File}
               value={nameCategory}
-              onChange={(e) => setNameCategory(e.target.value)}
+              onChange={(event: ChangeEvent<HTMLInputElement>) => setNameCategory(event.target.value)}
               placeholder="Masukan Nama"
               validation={errorMessage ? "border-red-600" : "border-gray-300"}
             ></TextInput>
