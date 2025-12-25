@@ -1,4 +1,3 @@
-// import { FormAuth } from "../components/Fragments/Form/FormAuth";
 import { Button } from "../components/Elements/Button";
 import { Label } from "../components/Elements/Label";
 import { Links } from "../components/Elements/Link";
@@ -9,31 +8,48 @@ import { useNavigate } from "react-router-dom";
 import { useState, type FormEvent } from "react";
 import UserData from "../data/DataUsers";
 
+type ErrorState = {
+  email?: string;
+  password?: string;
+  general?: string;
+};
+
 function AuthForm() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const validateLogin = (email, password) => {
-    if (!email || !password) {
-      return "EMPTY";
-    }
-
-    const user = UserData.find((user) => user.email === email && user.password === password);
-
-    return user ? "OK" : "INVALID";
-  };
+  const [errorMsg, setErrorMsg] = useState<ErrorState>({});
 
   const handleToSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setErrorMsg({});
 
-    const statusLogin = validateLogin(email, password);
+    const newError: ErrorState = {};
 
-    if (statusLogin === "EMPTY") {
-      alert("Silahkan masukan data diri Anda!");
+    if (!email) {
+      newError.email = "Masukan alamat email yang valid!";
+    }
+
+    if (!password) {
+      newError.password = "Masukan password yang valid!";
+    } else if (password.length < 8) {
+      newError.password = "Password minimal 8 karakter";
+    }
+
+    if (Object.keys(newError).length > 0) {
+      setErrorMsg(newError);
       return;
-    } else if (statusLogin === "INVALID") {
-      alert("Email atau password yang Anda masukan salah!");
+    }
+
+    const ValidateLogin = UserData.find((user) => user.email === email && user.password === password);
+
+    if (!ValidateLogin) {
+      setErrorMsg({
+        general: "Email atau Password Anda salah, coba lagi!",
+        email: "",
+        password: "",
+      });
       return;
     }
 
@@ -46,9 +62,21 @@ function AuthForm() {
 
   return (
     <GuestLayout title="Selamat Datang" view="login">
+      {errorMsg.general && <div className="text-sm text-red-600 px-3 py-1 bg-red-100 rounded-lg mb-3">{errorMsg.general}</div>}
       <form onSubmit={handleToSubmit} autoComplete="off" method="post" className="space-y-4">
-        <TextInput type="email" title="Email" nama="email" icon={Mail} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@gmail.com"></TextInput>
-        <TextInput type="password" title="Password" nama="password" icon={Lock} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Masukan Password"></TextInput>
+        <TextInput type="email" title="Email" nama="email" icon={Mail} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@gmail.com" validation={errorMsg.email ? "border-red-600" : "border-gray-300"}></TextInput>
+        {errorMsg.email && <p className="text-sm text-red-500 mb-1">{errorMsg.email}</p>}
+        <TextInput
+          type="password"
+          title="Password"
+          nama="password"
+          icon={Lock}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Masukan Password"
+          validation={errorMsg.password ? "border-red-600" : "border-gray-300"}
+        ></TextInput>
+        {errorMsg.password && <p className="text-sm mb-1 text-red-500">{errorMsg.password}</p>}
         <div className="flex justify-between items-center">
           <div className="flex gap-2">
             <input type="checkbox" name="remember" id="remember" />
