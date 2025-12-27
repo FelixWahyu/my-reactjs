@@ -5,11 +5,11 @@ import Produks from "../data/DataProduk";
 export default function OrdersPage() {
   const [Orders, setOrders] = useState(Produks);
 
-  const handleTambah = (id) => {
+  const handleTambah = (id: string | number) => {
     setOrders((prev) => prev.map((item) => (item.id === id ? { ...item, qty: item.qty + 1 } : item)));
   };
 
-  const handleKurangi = (id) => {
+  const handleKurangi = (id: string | number) => {
     setOrders((prev) => prev.map((item) => (item.id === id ? { ...item, qty: item.qty > 0 ? item.qty - 1 : 0 } : item)));
   };
 

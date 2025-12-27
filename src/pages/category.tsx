@@ -37,7 +37,7 @@ export default function CategoryContent() {
             <TextInput
               type="text"
               title="Nama Kategori"
-              nama="category"
+              name="category"
               icon={File}
               value={nameCategory}
               onChange={(event: ChangeEvent<HTMLInputElement>) => setNameCategory(event.target.value)}

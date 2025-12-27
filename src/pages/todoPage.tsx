@@ -1,14 +1,14 @@
 import AuthLayout from "../components/Layouts/AuthLayout";
 import { TextInput } from "../components/Fragments/TextInput/TextInput";
 import { File, X } from "lucide-react";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 
 const TodoPage = () => {
   const [listItem, setListItem] = useState([]);
-  const [nameItem, setNameItem] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [nameItem, setNameItem] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const handleTambahTodoList = (event) => {
+  const handleTambahTodoList = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     let newError = "";
@@ -28,7 +28,7 @@ const TodoPage = () => {
     setErrorMessage("");
   };
 
-  const handleHapus = (indexHapus) => {
+  const handleHapus = (indexHapus: string | number) => {
     setListItem(listItem.filter((_, index) => index !== indexHapus));
   };
 
@@ -56,7 +56,7 @@ const TodoPage = () => {
             <TextInput
               title="List Nama"
               type="text"
-              nama="todo"
+              name="todo"
               icon={File}
               value={nameItem}
               onChange={(e) => setNameItem(e.target.value)}

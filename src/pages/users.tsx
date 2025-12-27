@@ -3,21 +3,27 @@ import UserData from "../data/DataUsers";
 import UserCard from "../components/Fragments/Card/UserCard";
 import { TextInput } from "../components/Fragments/TextInput/TextInput";
 import { Backpack, Mail, User, Trash2 } from "lucide-react";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+
+type ErrorState = {
+  name?: string;
+  email?: string;
+  job?: string;
+};
 
 export default function UsersContent() {
   const [dataUsers, setDataUsers] = useState(UserData);
-  const [nameUser, setNameUser] = useState("");
-  const [emailUser, setEmailUser] = useState("");
-  const [jobUser, setJobUser] = useState("");
-  const [errorMessage, setErrorMessage] = useState({});
+  const [nameUser, setNameUser] = useState<string>("");
+  const [emailUser, setEmailUser] = useState<string>("");
+  const [jobUser, setJobUser] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<ErrorState>({});
 
   console.log(dataUsers);
 
-  const handleSubmitForm = (event) => {
+  const handleSubmitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    let newError = {};
+    const newError: ErrorState = {};
 
     if (!nameUser.trim()) {
       newError.name = "Silahkan isi nama lengkap anda!";
@@ -51,7 +57,7 @@ export default function UsersContent() {
     setErrorMessage({});
   };
 
-  const handleDeleteData = (id) => {
+  const handleDeleteData = (id: string | number) => {
     setDataUsers(dataUsers.filter((data) => data.id !== id));
   };
 
@@ -64,7 +70,7 @@ export default function UsersContent() {
             <TextInput
               title="Nama Lengkap"
               type="text"
-              nama="name"
+              name="name"
               value={nameUser}
               onChange={(event) => setNameUser(event.target.value)}
               icon={User}
@@ -75,7 +81,7 @@ export default function UsersContent() {
             <TextInput
               title="Email"
               type="email"
-              nama="email"
+              name="email"
               icon={Mail}
               value={emailUser}
               onChange={(event) => setEmailUser(event.target.value)}
@@ -86,7 +92,7 @@ export default function UsersContent() {
             <TextInput
               title="Pekerjaan/Karir"
               type="job"
-              nama="job"
+              name="job"
               icon={Backpack}
               value={jobUser}
               onChange={(event) => setJobUser(event.target.value)}

@@ -64,12 +64,12 @@ function AuthForm() {
     <GuestLayout title="Selamat Datang" view="login">
       {errorMsg.general && <div className="text-sm text-red-600 px-3 py-1 bg-red-100 rounded-lg mb-3">{errorMsg.general}</div>}
       <form onSubmit={handleToSubmit} autoComplete="off" method="post" className="space-y-4">
-        <TextInput type="email" title="Email" nama="email" icon={Mail} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@gmail.com" validation={errorMsg.email ? "border-red-600" : "border-gray-300"}></TextInput>
+        <TextInput type="email" title="Email" name="email" icon={Mail} value={email} onChange={(e) => setEmail(e.target.value)} placeholder="example@gmail.com" validation={errorMsg.email ? "border-red-600" : "border-gray-300"}></TextInput>
         {errorMsg.email && <p className="text-sm text-red-500 mb-1">{errorMsg.email}</p>}
         <TextInput
           type="password"
           title="Password"
-          nama="password"
+          name="password"
           icon={Lock}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
