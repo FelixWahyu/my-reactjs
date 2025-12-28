@@ -27,7 +27,27 @@ export default function UsersContent() {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
+    console.log(value);
+
     setUserForm((prev) => ({ ...prev, [name]: value }));
+    let ErrorText = "";
+
+    const EmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (name === "name") {
+      if (value.trim().length > 0 && value.trim().length < 3) {
+        ErrorText = "Nama minimal 3 karakter";
+      }
+    } else if (name === "email") {
+      if (value.trim().length > 0 && !EmailRegex.test(value.trim())) {
+        ErrorText = "Format email tidak valid";
+      }
+    } else if (name === "job") {
+      if (value.trim().length > 0 && value.trim().length < 3) {
+        ErrorText = "Pekerjaan mnimimal 3 karakter";
+      }
+    }
+
+    setErrorMessage((prevError) => ({ ...prevError, [name]: ErrorText }));
   };
 
   const handleSubmitForm = (event: FormEvent<HTMLFormElement>) => {
@@ -38,8 +58,6 @@ export default function UsersContent() {
 
     if (!UserForm.name.trim()) {
       newError.name = "Silahkan isi nama lengkap anda!";
-    } else if (UserForm.name.length < 3) {
-      newError.name = "Nama minimal menggunakan 3 karakter";
     }
 
     if (!UserForm.email) {
@@ -93,7 +111,7 @@ export default function UsersContent() {
             {errorMessage.name && <p className="text-red-500 mb-1 text-sm">{errorMessage.name}</p>}
             <TextInput title="Email" type="email" name="email" icon={Mail} value={UserForm.email} onChange={handleChange} placeholder="Masukan Alamat Email" validation={errorMessage.email ? "border-red-600" : "border-gray-300"}></TextInput>
             {errorMessage.email && <p className="text-red-500 mb-1 text-sm">{errorMessage.email}</p>}
-            <TextInput title="Pekerjaan/Karir" type="job" name="job" icon={Backpack} value={UserForm.job} onChange={handleChange} placeholder="Masukan Karir" validation={errorMessage.job ? "border-red-600" : "border-gray-300"}></TextInput>
+            <TextInput title="Pekerjaan/Karir" type="text" name="job" icon={Backpack} value={UserForm.job} onChange={handleChange} placeholder="Masukan Karir" validation={errorMessage.job ? "border-red-600" : "border-gray-300"}></TextInput>
             {errorMessage.job && <p className="text-red-500 mb-1 text-sm">{errorMessage.job}</p>}
             <div className="mt-4">
               <button className="px-3 py-1 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded-lg">Tambah</button>
