@@ -3,10 +3,15 @@ import AuthLayout from "../components/Layouts/AuthLayout";
 import { TextInput } from "../components/Fragments/TextInput/TextInput";
 import { File } from "lucide-react";
 
+type CategoryForm = {
+  id: number;
+  text: string;
+};
+
 export default function CategoryContent() {
-  const [Category, setCategory] = useState(["Makanan"]);
-  const [nameCategory, setNameCategory] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [Category, setCategory] = useState<CategoryForm[]>([]);
+  const [nameCategory, setNameCategory] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const handelTambahCategory = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -23,7 +28,12 @@ export default function CategoryContent() {
 
     if (newError) return;
 
-    setCategory((prev) => [...prev, nameCategory]);
+    const newCategory: CategoryForm = {
+      id: Date.now(),
+      text: nameCategory,
+    };
+
+    setCategory((prevCategory) => [...prevCategory, newCategory]);
     setNameCategory("");
     setErrorMessage("");
   };
@@ -63,9 +73,9 @@ export default function CategoryContent() {
             <tbody>
               {Category.length > 0 ? (
                 Category.map((item, index) => (
-                  <tr key={index} className="odd:bg-white even:bg-gray-100 hover:bg-gray-200">
+                  <tr key={item.id} className="odd:bg-white even:bg-gray-100 hover:bg-gray-200">
                     <td className="px-4 py-2 text-center">{index + 1}</td>
-                    <td className="px-4 py-2">{item}</td>
+                    <td className="px-4 py-2">{item.text}</td>
                   </tr>
                 ))
               ) : (

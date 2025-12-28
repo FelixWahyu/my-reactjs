@@ -3,39 +3,50 @@ import UserData from "../data/DataUsers";
 import UserCard from "../components/Fragments/Card/UserCard";
 import { TextInput } from "../components/Fragments/TextInput/TextInput";
 import { Backpack, Mail, User, Trash2 } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 
-type ErrorState = {
-  name?: string;
-  email?: string;
-  job?: string;
+type FormUser = {
+  id: string | number;
+  name: string;
+  email: string;
+  job: string;
 };
 
+type ErrorState = Partial<FormUser>;
+
 export default function UsersContent() {
-  const [dataUsers, setDataUsers] = useState(UserData);
-  const [nameUser, setNameUser] = useState<string>("");
-  const [emailUser, setEmailUser] = useState<string>("");
-  const [jobUser, setJobUser] = useState<string>("");
+  const [dataUsers, setDataUsers] = useState<FormUser[]>(UserData);
+  const [UserForm, setUserForm] = useState<FormUser>({
+    id: "",
+    name: "",
+    email: "",
+    job: "",
+  });
   const [errorMessage, setErrorMessage] = useState<ErrorState>({});
 
-  console.log(dataUsers);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setUserForm((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmitForm = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setErrorMessage({});
 
     const newError: ErrorState = {};
 
-    if (!nameUser.trim()) {
+    if (!UserForm.name.trim()) {
       newError.name = "Silahkan isi nama lengkap anda!";
-    } else if (nameUser.length < 3) {
+    } else if (UserForm.name.length < 3) {
       newError.name = "Nama minimal menggunakan 3 karakter";
     }
 
-    if (!emailUser.trim()) {
+    if (!UserForm.email) {
       newError.email = "Silahkan isi email anda!";
     }
 
-    if (!jobUser.trim()) {
+    if (!UserForm.job) {
       newError.job = "Silahkan isi pekerjaan anda!";
     }
 
@@ -45,16 +56,18 @@ export default function UsersContent() {
 
     const itemUsers = {
       id: Date.now(),
-      name: nameUser,
-      email: emailUser,
-      job: jobUser,
+      name: UserForm.name,
+      email: UserForm.email,
+      job: UserForm.job,
     };
 
     setDataUsers((data) => [...data, itemUsers]);
-    setNameUser("");
-    setEmailUser("");
-    setJobUser("");
-    setErrorMessage({});
+    setUserForm({
+      id: "",
+      name: "",
+      email: "",
+      job: "",
+    });
   };
 
   const handleDeleteData = (id: string | number) => {
@@ -71,35 +84,17 @@ export default function UsersContent() {
               title="Nama Lengkap"
               type="text"
               name="name"
-              value={nameUser}
-              onChange={(event) => setNameUser(event.target.value)}
+              value={UserForm.name}
+              onChange={handleChange}
               icon={User}
               placeholder="Masukan Nama Lengkap"
               validation={errorMessage.name ? "border-red-600" : "border-gray-300"}
             ></TextInput>
             {errorMessage.name && <p className="text-red-500 mb-1 text-sm">{errorMessage.name}</p>}
-            <TextInput
-              title="Email"
-              type="email"
-              name="email"
-              icon={Mail}
-              value={emailUser}
-              onChange={(event) => setEmailUser(event.target.value)}
-              placeholder="Masukan Alamat Email"
-              validation={errorMessage.email ? "border-red-600" : "border-gray-300"}
-            ></TextInput>
+            <TextInput title="Email" type="email" name="email" icon={Mail} value={UserForm.email} onChange={handleChange} placeholder="Masukan Alamat Email" validation={errorMessage.email ? "border-red-600" : "border-gray-300"}></TextInput>
             {errorMessage.email && <p className="text-red-500 mb-1 text-sm">{errorMessage.email}</p>}
-            <TextInput
-              title="Pekerjaan/Karir"
-              type="job"
-              name="job"
-              icon={Backpack}
-              value={jobUser}
-              onChange={(event) => setJobUser(event.target.value)}
-              placeholder="Masukan Karir"
-              validation={errorMessage.job ? "border-red-600" : "border-gray-300"}
-            ></TextInput>
-            {errorMessage.job ? <p className="text-red-500 mb-1 text-sm">{errorMessage.job}</p> : ""}
+            <TextInput title="Pekerjaan/Karir" type="job" name="job" icon={Backpack} value={UserForm.job} onChange={handleChange} placeholder="Masukan Karir" validation={errorMessage.job ? "border-red-600" : "border-gray-300"}></TextInput>
+            {errorMessage.job && <p className="text-red-500 mb-1 text-sm">{errorMessage.job}</p>}
             <div className="mt-4">
               <button className="px-3 py-1 bg-gray-200 hover:bg-gray-300 cursor-pointer rounded-lg">Tambah</button>
             </div>
