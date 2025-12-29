@@ -28,6 +28,30 @@ function RegisterForm() {
     const { name, value } = e.target;
 
     setFormData((prev) => ({ ...prev, [name]: value }));
+    let ErrorInput = "";
+
+    const EmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    switch (name) {
+      case "name":
+        if (value.trim().length > 0 && value.trim().length < 3) {
+          ErrorInput = "Nama minimal 3 karakter";
+        }
+        break;
+      case "email":
+        if (value.trim().length > 0 && !EmailRegex.test(value.trim())) {
+          ErrorInput = "Format email tidak valid";
+        }
+        break;
+      case "password":
+        if (value.trim().length > 0 && value.trim().length < 8) {
+          ErrorInput = "Password minimal 8 karakter";
+        }
+        break;
+      default:
+        break;
+    }
+
+    setErrorMsg((prev) => ({ ...prev, [name]: ErrorInput }));
   };
 
   const handelSubmited = (e: FormEvent<HTMLFormElement>) => {
@@ -38,8 +62,6 @@ function RegisterForm() {
 
     if (!formData.name.trim()) {
       newError.name = "Masukan nama lengkap Anda!";
-    } else if (formData.name.length < 3) {
-      newError.name = "Nama minimal 3 karakter!";
     }
 
     if (!formData.email) {
@@ -48,8 +70,6 @@ function RegisterForm() {
 
     if (!formData.password) {
       newError.password = "Masukan password yang valid!";
-    } else if (formData.password.length < 8) {
-      newError.password = "Password minimal 8 karakter!";
     }
 
     if (!formData.confirmPassword) {

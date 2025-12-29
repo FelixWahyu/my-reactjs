@@ -1,14 +1,19 @@
 import { useState } from "react";
+import { Minus, Plus, TimerReset } from "lucide-react";
 import AuthLayout from "../components/Layouts/AuthLayout";
 
 const CounterPage = () => {
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState<number>(0);
 
   const handleTambah = () => {
     setCounter((prev) => prev + 1);
   };
 
   const handleKurangi = () => {
+    if (counter === 0) {
+      alert("Tidak bisa dikurangi lagi!");
+      return;
+    }
     setCounter((prev) => (prev > 0 ? prev - 1 : 0));
   };
 
@@ -20,14 +25,14 @@ const CounterPage = () => {
     <AuthLayout>
       <div className="flex max-w-md mx-auto border border-gray-300 shadow-md p-4 rounded-lg justify-center items-center gap-4">
         <button onClick={handleKurangi} disabled={counter === 0} className="bg-gray-200 p-1 rounded-md hover:bg-gray-300 border border-gray-300 disabled:opacity-40 font-medium">
-          -
+          <Minus className="w-5 h-5" />
         </button>
         <span className={`font-semibold ${counter >= 10 ? "text-red-500" : "text-gray-800"}`}>{counter}</span>
         <button onClick={handleTambah} className="bg-gray-200 p-1 rounded-md hover:bg-gray-300 border border-gray-300 font-medium">
-          +
+          <Plus className="w-5 h-5" />
         </button>
         <button onClick={handleReset} className="bg-blue-500 p-2 rounded-md hover:bg-blue-600 font-semibold text-white">
-          Reset
+          <TimerReset className="w-5 h-5" />
         </button>
       </div>
     </AuthLayout>

@@ -29,6 +29,25 @@ function AuthForm() {
     const { name, value } = e.target;
 
     setLoginForm((prev) => ({ ...prev, [name]: value }));
+    let ErrorInput = "";
+
+    const EmailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    switch (name) {
+      case "email":
+        if (value.trim().length > 0 && !EmailRegex.test(value.trim())) {
+          ErrorInput = "Format email tidak valid";
+        }
+        break;
+      case "password":
+        if (value.trim().length > 0 && value.trim().length < 8) {
+          ErrorInput = "Password minimal 8 karakter";
+        }
+        break;
+      default:
+        break;
+    }
+
+    setErrorMsg((prev) => ({ ...prev, [name]: ErrorInput }));
   };
 
   const handleToSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -43,8 +62,6 @@ function AuthForm() {
 
     if (!LoginForm.password) {
       newError.password = "Masukan password yang valid!";
-    } else if (LoginForm.password.length < 8) {
-      newError.password = "Password minimal 8 karakter";
     }
 
     if (Object.keys(newError).length > 0) {
@@ -52,23 +69,18 @@ function AuthForm() {
       return;
     }
 
-    const ValidateLogin = UserData.find((user) => user.email === LoginForm.email && user.password === LoginForm.password);
+    const ValidateUser = UserData.find((user) => user.email === LoginForm.email);
 
-    if (!ValidateLogin) {
+    if (!ValidateUser) {
       setErrorMsg({
         general: "Email yang Anda masukan tidak terdaftar!",
         email: "",
         password: "",
       });
       return;
-    } else if (UserData.find((user) => user.email !== LoginForm.email)) {
-      setErrorMsg({
-        general: "",
-        email: "Email yang Anda masukan salah, coba lagi!",
-        password: "",
-      });
-      return;
-    } else if (UserData.find((user) => user.password !== LoginForm.password)) {
+    }
+
+    if (ValidateUser.password !== LoginForm.password) {
       setErrorMsg({
         general: "",
         email: "",

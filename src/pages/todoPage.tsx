@@ -1,7 +1,7 @@
 import AuthLayout from "../components/Layouts/AuthLayout";
 import { TextInput } from "../components/Fragments/TextInput/TextInput";
 import { File, X } from "lucide-react";
-import { useState, type FormEvent } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 
 type TodoItem = {
   id: number;
@@ -13,6 +13,18 @@ const TodoPage = () => {
   const [nameItem, setNameItem] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const InputValue = e.target.value;
+
+    setNameItem(InputValue);
+
+    if (InputValue.trim().length > 0 && InputValue.trim().length < 3) {
+      setErrorMessage("Nama list minimal 3 karakter");
+    } else {
+      setErrorMessage("");
+    }
+  };
+
   const handleTambahTodoList = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -20,8 +32,6 @@ const TodoPage = () => {
 
     if (!nameItem.trim()) {
       newError = "Silahkan isi nama list anda!";
-    } else if (nameItem.length < 3) {
-      newError = "Nama list minimal 3 karakter!";
     }
 
     setErrorMessage(newError);
@@ -69,16 +79,7 @@ const TodoPage = () => {
         </div>
         <div>
           <form className="flex flex-col gap-4" onSubmit={handleTambahTodoList} action="">
-            <TextInput
-              title="List Nama"
-              type="text"
-              name="todo"
-              icon={File}
-              value={nameItem}
-              onChange={(e) => setNameItem(e.target.value)}
-              placeholder="Masukan list"
-              validation={errorMessage ? "border-red-600" : "border-gray-300"}
-            ></TextInput>
+            <TextInput title="List Nama" type="text" name="todo" icon={File} value={nameItem} onChange={handleChange} placeholder="Masukan list" validation={errorMessage ? "border-red-600" : "border-gray-300"}></TextInput>
             {errorMessage && <p className="text-red-500 text-sm mb-1">{errorMessage}</p>}
             <div>
               <button type="submit" className="bg-gray-200 cursor-pointer hover:bg-gray-300 px-3 py-1 rounded-lg">

@@ -13,6 +13,18 @@ export default function CategoryContent() {
   const [nameCategory, setNameCategory] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const InputValue = e.target.value;
+
+    setNameCategory(InputValue);
+
+    if (InputValue.trim().length > 0 && InputValue.trim().length < 3) {
+      setErrorMessage("Nama kategori minimal 3 karakter");
+    } else {
+      setErrorMessage("");
+    }
+  };
+
   const handelTambahCategory = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -20,8 +32,6 @@ export default function CategoryContent() {
 
     if (!nameCategory.trim()) {
       newError = "Silahkan isi data kategori!";
-    } else if (nameCategory.length < 3) {
-      newError = "Nama kategori minimal 3 karakter";
     }
 
     setErrorMessage(newError);
@@ -44,16 +54,7 @@ export default function CategoryContent() {
         <div className="mb-8 p-6 border border-gray-300 rounded-lg shadow-md">
           <h2 className="text-3xl font-semibold text-gray-800 mb-6">Tambah Kategori</h2>
           <form onSubmit={handelTambahCategory} action="">
-            <TextInput
-              type="text"
-              title="Nama Kategori"
-              name="category"
-              icon={File}
-              value={nameCategory}
-              onChange={(event: ChangeEvent<HTMLInputElement>) => setNameCategory(event.target.value)}
-              placeholder="Masukan Nama"
-              validation={errorMessage ? "border-red-600" : "border-gray-300"}
-            ></TextInput>
+            <TextInput type="text" title="Nama Kategori" name="category" icon={File} value={nameCategory} onChange={handleChange} placeholder="Masukan Nama" validation={errorMessage ? "border-red-600" : "border-gray-300"}></TextInput>
             {errorMessage && <p className="text-red-500 text-sm mb-1">{errorMessage}</p>}
             <button type="submit" className="self-end cursor-pointer mt-6 bg-gray-200 text-gray-800 px-3 py-1 rounded-md hover:bg-gray-300">
               Tambah
