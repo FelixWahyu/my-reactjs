@@ -1,8 +1,8 @@
-import { Menu, X, ShoppingBag, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingBag, ShoppingCart, Heart } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const MainLayout = ({ children, cartCount = 0 }) => {
+const MainLayout = ({ children, cartCount = 0, favoriteCount = 0 }) => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   return (
@@ -37,11 +37,21 @@ const MainLayout = ({ children, cartCount = 0 }) => {
               </a>
             </div>
             <div className="flex items-center">
-              <div className="relative mr-4 md:mr-8">
-                <button className="text-gray-800 hover:text-blue-600 cursor-pointer p-1">
-                  <ShoppingCart className="w-6 h-6" />
-                  {cartCount > 0 && <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] flex items-center justify-center border-2 border-white">{cartCount}</span>}
-                </button>
+              <div className="mr-4 md:mr-8 flex gap-4 items-center">
+                <div className="relative">
+                  <button className="text-gray-800 hover:text-blue-600 cursor-pointer p-1">
+                    <Heart className="w-6 h-6" />
+                    {favoriteCount > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] flex items-center justify-center border-2 border-white">{favoriteCount}</span>
+                    )}
+                  </button>
+                </div>
+                <div className="relative">
+                  <button className="text-gray-800 hover:text-blue-600 cursor-pointer p-1">
+                    <ShoppingCart className="w-6 h-6" />
+                    {cartCount > 0 && <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] flex items-center justify-center border-2 border-white">{cartCount}</span>}
+                  </button>
+                </div>
               </div>
               <div className="hidden md:flex items-center gap-3">
                 <Link to={"/login"} className="px-4 py-1 border border-blue-600 bg-blue-600 rounded-lg text-white font-medium hover:bg-blue-700">
