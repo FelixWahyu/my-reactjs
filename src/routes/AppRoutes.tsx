@@ -10,6 +10,7 @@ import DetailProduct from "../pages/detailProduct";
 import CounterPage from "../pages/counter";
 import TodoPage from "../pages/todoPage";
 import KatalogProduct from "../pages/katalogProduct";
+import FavoritePage from "../pages/favoritesPage";
 
 export default function AppRouter() {
   return (
@@ -26,6 +27,7 @@ export default function AppRouter() {
         <Route path="/orders" element={<OrdersPage></OrdersPage>} />
         <Route path="/counter" element={<CounterPage></CounterPage>} />
         <Route path="/todo-list" element={<TodoPage></TodoPage>} />
+        <Route path="/favorites" element={<FavoritePage></FavoritePage>} />
       </Routes>
     </>
   );

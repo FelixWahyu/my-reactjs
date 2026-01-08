@@ -7,6 +7,7 @@ const products = [
     id: 1,
     name: "Kaos Hitam Polos",
     price: 150000,
+    category: "Kaos",
     image: "https://images.unsplash.com/photo-1654570818480-54524bf0186b?q=80&w=478&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores, ducimus neque ad sunt laudantium aut!",
   },
@@ -14,27 +15,31 @@ const products = [
     id: 2,
     name: "Celana Panjang",
     price: 120000,
-    image: "https://images.unsplash.com/photo-1718252540558-7b383b52642e?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    category: "Celana Panjang",
+    image: "https://images.unsplash.com/photo-1548883354-7622d03aca27?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores, ducimus neque ad sunt laudantium aut!",
   },
   {
     id: 3,
     name: "Kaos Polos",
     price: 100000,
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    category: "Kaos",
+    image: "https://images.unsplash.com/photo-1716541424893-734612ddcabb?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores, ducimus neque ad sunt laudantium aut!",
   },
   {
     id: 4,
     name: "Kemeja Kotak-kotak",
     price: 180000,
-    image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=580&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    category: "Kemeja",
+    image: "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores, ducimus neque ad sunt laudantium aut!",
   },
 ];
 
 const KatalogProduct = () => {
   const [favorites, setFavorites] = useState([]);
+  console.log(favorites);
   const toggleFavorites = (id) => {
     if (favorites.includes(id)) {
       setFavorites(favorites.filter((favId) => favId !== id));
@@ -65,8 +70,11 @@ const KatalogProduct = () => {
                   </button>
                 </div>
                 <div className="my-4">
-                  <h2 className="text-lg font-semibold">{item.name}</h2>
-                  <p className="text-sm text-gray-600 my-1">{item.description}</p>
+                  <div className="flex flex-col">
+                    <h2 className="text-lg font-semibold">{item.name}</h2>
+                    <span className="text-sm text-gray-600">{item.category}</span>
+                  </div>
+                  <p className="text-sm text-gray-800 my-1">{item.description}</p>
                   <h2 className="font-medium">Rp {item.price.toLocaleString("id-ID")}</h2>
                 </div>
                 <div>

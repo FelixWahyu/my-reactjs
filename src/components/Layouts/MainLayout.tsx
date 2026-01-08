@@ -39,12 +39,12 @@ const MainLayout = ({ children, cartCount = 0, favoriteCount = 0 }) => {
             <div className="flex items-center">
               <div className="mr-4 md:mr-8 flex gap-4 items-center">
                 <div className="relative">
-                  <button className="text-gray-800 hover:text-blue-600 cursor-pointer p-1">
+                  <Link to={"/favorites"} className="text-gray-800 hover:text-blue-600 cursor-pointer p-1">
                     <Heart className="w-6 h-6" />
                     {favoriteCount > 0 && (
                       <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] flex items-center justify-center border-2 border-white">{favoriteCount}</span>
                     )}
-                  </button>
+                  </Link>
                 </div>
                 <div className="relative">
                   <button className="text-gray-800 hover:text-blue-600 cursor-pointer p-1">
