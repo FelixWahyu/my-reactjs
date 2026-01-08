@@ -1,9 +1,18 @@
 import { Menu, X, ShoppingBag, ShoppingCart, Heart } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useWishlist } from "../../context/WishlistContext";
 
-const MainLayout = ({ children, cartCount = 0, favoriteCount = 0 }) => {
+interface MainLayoutProps {
+  children: React.ReactNode;
+  cartCount?: number;
+}
+
+const MainLayout: React.FC<MainLayoutProps> = ({ children, cartCount = 0 }) => {
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  const { wishlist } = useWishlist();
+  const favoriteCount = wishlist.length;
 
   return (
     <div className="font-sans min-h-screen">
@@ -26,25 +35,25 @@ const MainLayout = ({ children, cartCount = 0, favoriteCount = 0 }) => {
               </div>
             </div>
             <div className="hidden md:flex items-center gap-6">
-              <a href="#" className="text-sm font-medium text-gray-800 hover:text-blue-500">
+              <Link to={"/"} className="text-sm font-medium text-gray-800 hover:text-blue-500">
                 Beranda
-              </a>
+              </Link>
               <a href="#" className="text-sm font-medium text-gray-800 hover:text-blue-500">
                 Tentang Kami
               </a>
-              <a href="#" className="text-sm font-medium text-gray-800 hover:text-blue-500">
+              <Link to={"/"} className="text-sm font-medium text-gray-800 hover:text-blue-500">
                 Katalog Produk
-              </a>
+              </Link>
             </div>
             <div className="flex items-center">
               <div className="mr-4 md:mr-8 flex gap-4 items-center">
                 <div className="relative">
-                  <Link to={"/favorites"} className="text-gray-800 hover:text-blue-600 cursor-pointer p-1">
+                  <Link to={"/favorites"} className="text-gray-800 hover:text-blue-600 cursor-pointer p-1 block">
                     <Heart className="w-6 h-6" />
-                    {favoriteCount > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] flex items-center justify-center border-2 border-white">{favoriteCount}</span>
-                    )}
                   </Link>
+                  {favoriteCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] flex items-center justify-center border-2 border-white">{favoriteCount}</span>
+                  )}
                 </div>
                 <div className="relative">
                   <button className="text-gray-800 hover:text-blue-600 cursor-pointer p-1">
