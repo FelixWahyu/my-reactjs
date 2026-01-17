@@ -1,6 +1,7 @@
 import MainLayout from "../components/Layouts/MainLayout";
 import { Heart } from "lucide-react";
 import { useWishlist, type Product } from "../context/WishlistContext";
+import HeroSection from "../components/HeroSection";
 
 const products: Product[] = [
   {
@@ -42,6 +43,7 @@ const KatalogProduct: React.FC = () => {
 
   return (
     <MainLayout>
+      <HeroSection />
       <div className="py-20 max-w-7xl mx-auto">
         <div className="mb-6 px-4">
           <h2 className="text-2xl font-semibold text-gray-800 mb-3">Katalog Produk</h2>
