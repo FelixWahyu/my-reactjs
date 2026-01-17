@@ -25,11 +25,11 @@ const FavoritePage: React.FC = () => {
               <div key={item.id} className="md:flex items-center bg-white border border-gray-200 shadow-sm rounded-xl p-4 gap-6">
                 <div className="flex items-center justify-between gap-8">
                   <div className="w-32 h-32 shrink-0 overflow-hidden rounded-lg bg-gray-100">
-                    <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
+                    <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                   </div>
 
                   <div className="flex-1 w-full text-left">
-                    <h2 className="text-lg font-bold text-gray-800">{item.name}</h2>
+                    <h2 className="text-lg font-bold text-gray-800">{item.title}</h2>
                     <p className="text-sm text-gray-500 line-clamp-1 mt-1 mb-2">{item.category}</p>
                     <h3 className="text-blue-600 font-semibold text-lg">Rp {item.price.toLocaleString("id-ID")}</h3>
                   </div>

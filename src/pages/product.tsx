@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import AuthLayout from "../components/Layouts/AuthLayout";
-import { getProduk } from "../api/produkApi";
+import { getProduk, type Product } from "../api/produkApi";
 import { Links } from "../components/Elements/Link";
 
 export default function ProductContent() {
   const [search, setSearch] = useState("");
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
 

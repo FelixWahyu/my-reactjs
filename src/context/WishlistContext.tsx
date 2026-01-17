@@ -1,13 +1,5 @@
 import { createContext, useState, useContext, useEffect, type ReactNode } from "react";
-
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  category: string;
-  image: string;
-  description: string;
-}
+import { type Product } from "../api/produkApi";
 
 export interface WishlistContextType {
   wishlist: Product[];
