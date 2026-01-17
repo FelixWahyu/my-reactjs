@@ -24,7 +24,7 @@ const FavoritePage: React.FC = () => {
             {wishlist.map((item) => (
               <div key={item.id} className="md:flex items-center bg-white border border-gray-200 shadow-sm rounded-xl p-4 gap-6">
                 <div className="flex items-center justify-between gap-8">
-                  <div className="w-32 h-32 flex-shrink-0 overflow-hidden rounded-lg bg-gray-100">
+                  <div className="w-32 h-32 shrink-0 overflow-hidden rounded-lg bg-gray-100">
                     <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                   </div>
 

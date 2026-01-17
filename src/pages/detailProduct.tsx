@@ -1,14 +1,16 @@
 import AuthLayout from "../components/Layouts/AuthLayout";
-import { getProdukById } from "../api/ProdukApi";
+import { getProdukById, type Product } from "../api/produkApi";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Links } from "../components/Elements/Link";
 
 export default function DetailProduct() {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState<Product | null>(null);
 
   useEffect(() => {
+    if (!id) return;
+
     getProdukById(id).then((res) => setProduct(res.data));
   }, [id]);
 
@@ -26,7 +28,7 @@ export default function DetailProduct() {
           /<span className="text-gray-800 font-semibold text-sm">{product.title}</span>
         </div>
         <div className="grid border border-gray-300 shadow-md rounded-lg p-6 md:grid-cols-2 gap-8">
-          <img src={product.image} className="h-72 mx-auto object-contain" />
+          <img src={product.image} className="h-72 mx-auto object-contain" alt={product.title} />
           <div>
             <h1 className="text-2xl font-bold">{product.title}</h1>
             <p className="text-blue-600 text-xl font-bold mt-4">${product.price.toFixed(2)}</p>

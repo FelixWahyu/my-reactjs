@@ -9,14 +9,14 @@ import OrdersPage from "../pages/orders";
 import DetailProduct from "../pages/detailProduct";
 import CounterPage from "../pages/counter";
 import TodoPage from "../pages/todoPage";
-import KatalogProduct from "../pages/katalogProduct";
+import LandingPage from "../pages/index";
 import FavoritePage from "../pages/favoritesPage";
 
 export default function AppRouter() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<KatalogProduct></KatalogProduct>} />
+        <Route path="/" element={<LandingPage></LandingPage>} />
         <Route path="/login" element={<AuthForm></AuthForm>} />
         <Route path="/register" element={<RegisterForm></RegisterForm>} />
         <Route path="/dashboard" element={<Dashboard></Dashboard>} />

@@ -38,9 +38,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, cartCount = 0 }) => {
               <Link to={"/"} className="text-sm font-medium text-gray-800 hover:text-blue-500">
                 Beranda
               </Link>
-              <a href="#" className="text-sm font-medium text-gray-800 hover:text-blue-500">
+              <Link to={"/"} className="text-sm font-medium text-gray-800 hover:text-blue-500">
                 Tentang Kami
-              </a>
+              </Link>
               <Link to={"/"} className="text-sm font-medium text-gray-800 hover:text-blue-500">
                 Katalog Produk
               </Link>
@@ -77,15 +77,15 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, cartCount = 0 }) => {
         {isMobileOpen && (
           <div className="md:hidden bg-white border-y border-gray-300 animate-fade-in-down">
             <div className="px-4 pt-2 pb-6 space-y-2">
-              <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+              <Link to={"/"} className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-blue-600 hover:bg-blue-50 transition-colors">
                 Beranda
-              </a>
-              <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+              </Link>
+              <Link to={"/"} className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-blue-600 hover:bg-blue-50 transition-colors">
                 Tentang Kami
-              </a>
-              <a href="#" className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+              </Link>
+              <Link to={"/"} className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-blue-600 hover:bg-blue-50 transition-colors">
                 Katalog Produk
-              </a>
+              </Link>
               <div className="pt-4 mt-4 border-t border-gray-100 flex flex-col gap-3">
                 <Link to={"/login"} className="block text-center w-full px-4 py-1 text-white font-medium border border-blue-600 rounded-lg bg-blue-600 hover:bg-blue-700">
                   Login

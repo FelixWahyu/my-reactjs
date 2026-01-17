@@ -1,6 +1,6 @@
 function HeroSection() {
   return (
-    <section className="min-h-screen flex items-center px-6 lg:px-20 bg-white">
+    <div className="min-h-screen flex items-center px-6 lg:px-20 bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 w-full items-center">
         <div className="max-w-xl">
           <h1 className="text-4xl lg:text-5xl font-bold leading-tight mb-6 text-gray-900">
@@ -21,7 +21,7 @@ function HeroSection() {
           <img src="https://images.unsplash.com/photo-1607345366928-199ea26cfe3e" className="h-72 w-full object-cover rounded-tl-[50%] rounded-br-[50%] lg:mt-20" alt="Fashion 2" />
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
