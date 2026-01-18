@@ -37,7 +37,7 @@ const KatalogProduct: React.FC = () => {
             return (
               <div key={item.id} className="border border-gray-300 shadow-md rounded-lg p-4 hover:shadow-[0_0_20px_rgba(59,130,246,0.8)]">
                 <div className="relative w-full h-72 overflow-hidden rounded-md">
-                  <img src={item.image} alt={item.title} className="w-full h-auto object-cover hover:scale-105 transition-transform duration-300" />
+                  <img src={item.image} alt={item.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                   <button
                     onClick={() => toggleWishlist(item)}
                     className="absolute top-3 right-3 p-2 rounded-full bg-white/90 backdrop-blur-sm shadow-md hover:bg-white transition-all transform hover:scale-110 active:scale-95 z-10 cursor-pointer"
