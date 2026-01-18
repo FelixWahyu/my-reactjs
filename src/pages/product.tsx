@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import AuthLayout from "../components/Layouts/AuthLayout";
 import { getProduk, type Product } from "../api/produkApi";
-import { Links } from "../components/Elements/Link";
+import TableRowProduct from "../components/ProductsRow";
 
 export default function ProductContent() {
   const [search, setSearch] = useState("");
@@ -76,22 +76,7 @@ export default function ProductContent() {
                   </td>
                 </tr>
               ) : currentProducts.length > 0 ? (
-                currentProducts.map((item, index) => (
-                  <tr key={item.id} className="odd:bg-white even:bg-gray-100 hover:bg-gray-200 transition">
-                    <td className="px-4 py-2 text-center">{indexOfFirstItem + index + 1}</td>
-                    <td className="px-4 py-2">{item.title}</td>
-                    <td className="px-4 py-2">{item.category}</td>
-                    <td className="px-4 py-2">${item.price.toFixed(2)}</td>
-                    <td className="px-4 py-2 text-center">
-                      <img src={item.image} alt={item.title} className="w-16 h-16 object-cover" />
-                    </td>
-                    <td className="px-4 py-2">
-                      <Links to={`/product/${item.id}`} classname="bg-blue-500 text-white font-semibold px-2 py-0.5 rounded-lg hover:bg-blue-600">
-                        Details
-                      </Links>
-                    </td>
-                  </tr>
-                ))
+                currentProducts.map((item, index) => <TableRowProduct key={item.id} product={item} index={indexOfFirstItem + index + 1} />)
               ) : (
                 <tr>
                   <td colSpan={6} className="text-center text-red-500 bg-red-50 py-4">
