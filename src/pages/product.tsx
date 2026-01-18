@@ -12,16 +12,28 @@ export default function ProductContent() {
   const itemsPerPage = 5;
 
   useEffect(() => {
-    getProduk()
-      .then((res) => setProducts(res.data))
-      .finally(() => setLoading(false));
+    let isMounted = true;
+    const getAllProducts = async () => {
+      try {
+        const data = await getProduk();
+        if (isMounted) setProducts(data);
+      } catch (error) {
+        console.log("Gagal mengambil data: ", error);
+      } finally {
+        if (isMounted) setLoading(false);
+      }
+    };
+    getAllProducts();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [search]);
 
-  const filteredProduct = products.filter((produk) => produk.title.toLowerCase().includes(search.toLowerCase()) || produk.category.toLowerCase().includes(search.toLowerCase()));
+  const filteredProduct = products.filter((produk) => (produk.title ?? "").toLowerCase().includes(search.toLowerCase()) || produk.category.toLowerCase().includes(search.toLowerCase()));
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -59,7 +71,7 @@ export default function ProductContent() {
             <tbody>
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="py-4 text-center">
+                  <td colSpan={6} className="py-4 text-center">
                     Loading...
                   </td>
                 </tr>
@@ -82,7 +94,7 @@ export default function ProductContent() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan={5} className="text-center text-red-500 bg-red-50 py-4">
+                  <td colSpan={6} className="text-center text-red-500 bg-red-50 py-4">
                     Data produk tidak ditemukan.
                   </td>
                 </tr>
