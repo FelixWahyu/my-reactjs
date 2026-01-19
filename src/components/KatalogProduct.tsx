@@ -46,11 +46,11 @@ const KatalogProduct: React.FC = () => {
                     <Heart className={`w-5 h-5 transition-colors duration-300 ${isLiked ? "fill-red-500 text-red-500" : "text-gray-500 hover:text-red-500"}`} />
                   </button>
                 </div>
-                <div className="my-4">
-                  <h2 className="text-lg font-semibold">{item.title}</h2>
+                <div className="flex-1 my-4">
+                  <h2 className="text-lg font-semibold line-clamp-1">{item.title}</h2>
                   <span className="text-sm text-gray-600">{item.category}</span>
                 </div>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center mx-auto">
                   <h2 className="font-medium text-amber-600">Rp {item.price.toLocaleString("id-ID")}</h2>
                   <div>
                     <button className="px-4 py-2 w-full bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 cursor-pointer">Add to Cart</button>
