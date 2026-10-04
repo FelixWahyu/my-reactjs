@@ -10,13 +10,15 @@ import DetailProduct from "../pages/detailProduct";
 import CounterPage from "../pages/counter";
 import TodoPage from "../pages/todoPage";
 import LandingPage from "../pages/index";
-import FavoritePage from "../pages/favoritesPage";
+import FavoritePage from "../pages/customers/favoritesPage";
+import CatalogProducts from "../pages/customers/catalogProduct";
 
 export default function AppRouter() {
   return (
     <>
       <Routes>
         <Route path="/" element={<LandingPage></LandingPage>} />
+        <Route path="/katalog" element={<CatalogProducts></CatalogProducts>} />
         <Route path="/login" element={<AuthForm></AuthForm>} />
         <Route path="/register" element={<RegisterForm></RegisterForm>} />
         <Route path="/dashboard" element={<Dashboard></Dashboard>} />

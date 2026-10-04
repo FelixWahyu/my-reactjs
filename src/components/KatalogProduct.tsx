@@ -25,7 +25,9 @@ const KatalogProduct: React.FC = () => {
   return (
     <div className="py-20 px-4 lg:px-0 max-w-7xl mx-auto">
       <div className="mb-6 px-4">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-3">Katalog Produk</h2>
+        <h2 id="katalog" className="text-2xl font-semibold text-gray-800 mb-3">
+          Katalog Produk
+        </h2>
         <p className="text-gray-500 text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium velit quibusdam beatae.</p>
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 items-center gap-4">

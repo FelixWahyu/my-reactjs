@@ -38,10 +38,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, cartCount = 0 }) => {
               <Link to={"/"} className="text-sm font-medium text-gray-800 hover:text-blue-500">
                 Beranda
               </Link>
-              <Link to={"/"} className="text-sm font-medium text-gray-800 hover:text-blue-500">
+              <Link to={"/about"} className="text-sm font-medium text-gray-800 hover:text-blue-500">
                 Tentang Kami
               </Link>
-              <Link to={"/"} className="text-sm font-medium text-gray-800 hover:text-blue-500">
+              <Link to={"/katalog"} className="text-sm font-medium text-gray-800 hover:text-blue-500">
                 Katalog Produk
               </Link>
             </div>
@@ -80,10 +80,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, cartCount = 0 }) => {
               <Link to={"/"} className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-blue-600 hover:bg-blue-50 transition-colors">
                 Beranda
               </Link>
-              <Link to={"/"} className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+              <Link to={"/about"} className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-blue-600 hover:bg-blue-50 transition-colors">
                 Tentang Kami
               </Link>
-              <Link to={"/"} className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-blue-600 hover:bg-blue-50 transition-colors">
+              <Link to={"/katalog"} className="block px-3 py-2 rounded-md text-base font-medium text-gray-800 hover:text-blue-600 hover:bg-blue-50 transition-colors">
                 Katalog Produk
               </Link>
               <div className="pt-4 mt-4 border-t border-gray-100 flex flex-col gap-3">

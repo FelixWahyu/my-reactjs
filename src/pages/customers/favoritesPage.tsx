@@ -1,7 +1,7 @@
 import React from "react";
 import { Trash2, HeartOff } from "lucide-react";
-import MainLayout from "../components/Layouts/MainLayout";
-import { useWishlist } from "../context/WishlistContext";
+import MainLayout from "../../components/Layouts/MainLayout";
+import { useWishlist } from "../../context/WishlistContext";
 
 const FavoritePage: React.FC = () => {
   const { wishlist, removeFromWishlist } = useWishlist();
