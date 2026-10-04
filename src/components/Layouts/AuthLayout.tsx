@@ -1,10 +1,14 @@
 import { Package, X, Menu, LogOut } from "lucide-react";
 import { Navigation } from "../Fragments/Navbar/NavLink";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import UserData from "../../data/DataUsers";
 import { useNavigate } from "react-router-dom";
 
-export default function AuthLayout(props) {
+interface AuthLayoutProps {
+  children: ReactNode;
+}
+
+export default function AuthLayout(props: AuthLayoutProps) {
   const { children } = props;
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();

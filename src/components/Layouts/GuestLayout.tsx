@@ -1,7 +1,14 @@
 import { Package } from "lucide-react";
 import { Links } from "../Elements/Link";
+import type { ReactNode } from "react";
 
-function GuestLayout(props) {
+interface GuestLayoutProps {
+  title: string;
+  children: ReactNode;
+  view?: string;
+}
+
+function GuestLayout(props: GuestLayoutProps) {
   const { title, children, view } = props;
 
   return (
@@ -26,7 +33,11 @@ function GuestLayout(props) {
   );
 }
 
-const Navigasi = (props) => {
+interface NavigasiProps {
+  contenType?: string;
+}
+
+const Navigasi = (props: NavigasiProps) => {
   const { contenType } = props;
 
   if (contenType === "login") {

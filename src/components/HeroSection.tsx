@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function HeroSection() {
   return (
     <div className="min-h-screen flex items-center px-6 lg:px-20 bg-white">
@@ -11,8 +13,12 @@ function HeroSection() {
           <p className="text-gray-600 text-lg mb-8">Temukan koleksi fashion terbaik dengan kualitas premium dan desain modern. Cocok untuk aktivitas harian hingga acara spesial.</p>
 
           <div className="flex gap-4">
-            <button className="bg-blue-500 hover:bg-blue-600 transition text-white px-6 py-3 rounded-lg font-semibold cursor-pointer shadow-sm">Katalog Produk</button>
-            <button className="border border-gray-300 hover:bg-gray-100 transition px-6 py-3 rounded-lg font-semibold cursor-pointer">Tentang Kami</button>
+            <Link to="/katalog" className="bg-blue-500 hover:bg-blue-600 transition text-white px-6 py-3 rounded-lg font-semibold cursor-pointer shadow-sm text-center">
+              Katalog Produk
+            </Link>
+            <Link to="/about" className="border border-gray-300 hover:bg-gray-100 transition px-6 py-3 rounded-lg font-semibold cursor-pointer text-center">
+              Tentang Kami
+            </Link>
           </div>
         </div>
 

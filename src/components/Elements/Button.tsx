@@ -1,4 +1,4 @@
-import { ReactNode, MouseEventHandler } from "react";
+import type { ReactNode, MouseEventHandler } from "react";
 
 type ButtonProps = {
   type?: "button" | "submit" | "reset";

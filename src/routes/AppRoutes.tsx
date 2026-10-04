@@ -12,12 +12,14 @@ import TodoPage from "../pages/todoPage";
 import LandingPage from "../pages/index";
 import FavoritePage from "../pages/customers/favoritesPage";
 import CatalogProducts from "../pages/customers/catalogProduct";
+import AboutPage from "../pages/customers/aboutPage";
 
 export default function AppRouter() {
   return (
     <>
       <Routes>
         <Route path="/" element={<LandingPage></LandingPage>} />
+        <Route path="/about" element={<AboutPage></AboutPage>} />
         <Route path="/katalog" element={<CatalogProducts></CatalogProducts>} />
         <Route path="/login" element={<AuthForm></AuthForm>} />
         <Route path="/register" element={<RegisterForm></RegisterForm>} />
