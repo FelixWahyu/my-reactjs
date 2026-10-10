@@ -1,5 +1,10 @@
 import axios from "axios";
 
+export interface Rating {
+  rate: number;
+  count: number;
+}
+
 export interface Product {
   id: number;
   title: string;
@@ -7,6 +12,7 @@ export interface Product {
   category: string;
   description: string;
   image: string;
+  rating: Rating;
 }
 
 const api = axios.create({

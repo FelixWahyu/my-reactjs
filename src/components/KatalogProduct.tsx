@@ -1,4 +1,4 @@
-import { Heart } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 import { useWishlist } from "../context/WishlistContext";
 import { useEffect, useState } from "react";
 import { getProduk, type Product } from "../api/produkApi";
@@ -39,6 +39,10 @@ const KatalogProduct: React.FC = () => {
             return (
               <div key={item.id} className="border border-gray-300 shadow-md rounded-lg p-4 hover:shadow-[0_0_20px_rgba(59,130,246,0.8)]">
                 <div className="relative w-full h-72 overflow-hidden rounded-md">
+                  <div className="absolute top-3 left-0 flex gap-1 items-center justify-center p-2 rounded-full bg-white/90 backdrop-blur-sm shadow-md z-10">
+                    <Star className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    <span>{item.rating.rate}</span>
+                  </div>
                   <img src={item.image} alt={item.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                   <button
                     onClick={() => toggleWishlist(item)}
@@ -53,7 +57,7 @@ const KatalogProduct: React.FC = () => {
                   <span className="text-sm text-gray-600">{item.category}</span>
                 </div>
                 <div className="flex justify-between items-center mx-auto">
-                  <h2 className="font-medium text-amber-600">Rp {item.price.toLocaleString("id-ID")}</h2>
+                  <h2 className="font-medium text-gray-800">Rp {item.price.toLocaleString("id-ID")}</h2>
                   <div>
                     <button className="px-4 py-2 w-full bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700 cursor-pointer">Add to Cart</button>
                   </div>
